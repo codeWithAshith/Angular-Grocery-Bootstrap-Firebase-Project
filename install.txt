@@ -7,8 +7,11 @@ npm i -D @angular/fire firebase
 npm i -D yargs dotenv
 
 
-run this before npm start
-!*** npm run config ***!
+// run this before npm start
+npm run config
 
-now, 
+// now, 
 npm start
+
+npm install bootstrap@5.2.3
+

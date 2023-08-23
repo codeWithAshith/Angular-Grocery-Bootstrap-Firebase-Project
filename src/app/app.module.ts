@@ -45,7 +45,7 @@ import { AdminProductsComponent } from './components/admin/products/products.com
       { path: 'order', component: OrderComponent },
       { path: 'login', component: LoginComponent },
       { path: 'admin/products', component: AdminProductsComponent },
-      { path: 'admin/order', component: AdminOrdersComponent },
+      { path: 'admin/orders', component: AdminOrdersComponent },
     ]),
   ],
   providers: [],

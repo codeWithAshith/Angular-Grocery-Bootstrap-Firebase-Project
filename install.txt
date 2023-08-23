@@ -15,3 +15,7 @@ npm start
 
 npm install bootstrap@5.2.3
 
+// eg ng g c components/home
+ng g c "componentName"
+
+

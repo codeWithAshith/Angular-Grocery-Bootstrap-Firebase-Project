@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { LottieModule } from 'ngx-lottie';
-  
+
 import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { AdminProductsComponent } from './components/admin/products/products.component';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
+import { AuthGuardService } from './services/auth-guard.service';
 
 export function playerFactory() {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -47,13 +48,33 @@ export function playerFactory() {
     LottieModule.forRoot({ player: playerFactory }),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
-      { path: 'products', component: ProductsComponent },
-      { path: 'cart', component: CartComponent },
-      { path: 'checkOut', component: CheckOutComponent },
-      { path: 'order', component: OrderComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'admin/products', component: AdminProductsComponent },
-      { path: 'admin/orders', component: AdminOrdersComponent },
+      { path: 'products', component: ProductsComponent },
+      {
+        path: 'cart',
+        component: CartComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'checkOut',
+        component: CheckOutComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'order',
+        component: OrderComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'admin/products',
+        component: AdminProductsComponent,
+        canActivate: [AuthGuardService],
+      },
+      {
+        path: 'admin/orders',
+        component: AdminOrdersComponent,
+        canActivate: [AuthGuardService],
+      },
     ]),
     provideDatabase(() => getDatabase()),
   ],

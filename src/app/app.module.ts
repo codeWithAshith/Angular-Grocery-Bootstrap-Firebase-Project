@@ -28,6 +28,7 @@ import {
 } from '@angular/fire/compat/database';
 import { AdminProductFormComponent } from './components/admin/product-form/product-form.component';
 import { FormsModule } from '@angular/forms';
+import { SpinnerComponent } from './components/utils/spinner/spinner.component';
 
 export function playerFactory() {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -47,6 +48,7 @@ export function playerFactory() {
     AdminOrdersComponent,
     AdminProductsComponent,
     AdminProductFormComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

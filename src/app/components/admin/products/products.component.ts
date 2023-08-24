@@ -10,14 +10,17 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class AdminProductsComponent implements OnInit {
   products: Product[] = [];
+  loading: boolean = false;
 
   constructor(private productService: ProductService) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.productService.getProducts().subscribe((response) => {
       this.products = response.map((product) => {
         return { id: product.key, ...product.payload.exportVal() };
       });
+      this.loading = false;
     });
   }
 }

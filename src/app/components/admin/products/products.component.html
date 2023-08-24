@@ -1,47 +1,55 @@
-
-<div class="d-flex justify-content-end">
-  <button
-    type="button"
-    class="btn btn-primary"
-    routerLink="/admin/products/new"
-  >
-    Add Product
-  </button>
+<div
+  *ngIf="loading"
+  class="d-flex justify-content-center align-items-center w-100"
+  style="min-height: 80vh"
+>
+  <spinner-util />
 </div>
-<div class="border mt-3" style="min-height: 75vh">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col" style="width: 20vw" class="text-center">Image</th>
-        <th scope="col" style="width: 20vw">Title</th>
-        <th scope="col" style="width: 20vw">Category</th>
-        <th scope="col" style="width: 10vw">Price</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="" *ngFor="let product of products">
-        <th scope="row" style="height: 50px">
-          <img
-            [src]="product.imageUrl"
-            alt=""
-            class="w-100"
-            style="object-fit: contain; height: 50px"
-          />
-        </th>
-        <td class="py-4">{{ product.title }}</td>
-        <td class="py-4">{{ product.category }}</td>
-        <td class="py-4">₹ {{ product.price }}</td>
-        <td class="py-4">
-          <button
-            class="btn btn-primary"
-            [routerLink]="['/admin/products/', product.id]"
-          >
-            Edit
-          </button>
-          <button class="mx-2 btn btn-danger">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div *ngIf="!loading">
+  <div class="d-flex justify-content-end">
+    <button
+      type="button"
+      class="btn btn-primary"
+      routerLink="/admin/products/new"
+    >
+      Add Product
+    </button>
+  </div>
+  <div class="border mt-3" style="min-height: 75vh">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 20vw" class="text-center">Image</th>
+          <th scope="col" style="width: 20vw">Title</th>
+          <th scope="col" style="width: 20vw">Category</th>
+          <th scope="col" style="width: 10vw">Price</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="" *ngFor="let product of products">
+          <th scope="row" style="height: 50px">
+            <img
+              [src]="product.imageUrl"
+              alt=""
+              class="w-100"
+              style="object-fit: contain; height: 50px"
+            />
+          </th>
+          <td class="py-4">{{ product.title }}</td>
+          <td class="py-4">{{ product.category }}</td>
+          <td class="py-4">₹ {{ product.price }}</td>
+          <td class="py-4">
+            <button
+              class="btn btn-primary"
+              [routerLink]="['/admin/products/', product.id]"
+            >
+              Edit
+            </button>
+            <button class="mx-2 btn btn-danger">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

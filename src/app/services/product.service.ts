@@ -30,11 +30,19 @@ export class ProductService {
     }
   }
 
+  updateProduct(id: string, product: Product) {
+    this.db.object('/products/' + id).update(product);
+  }
+
   getProducts() {
     return this.db.list('/products').snapshotChanges();
   }
 
   delete(id: string): void {
     this.db.object('/products/' + id).remove();
+  }
+
+  getProductById(id: string) {
+    return this.db.object('/products/' + id).valueChanges();
   }
 }

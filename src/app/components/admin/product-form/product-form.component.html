@@ -107,7 +107,9 @@
           </div>
 
           <div class="form-group">
-            <button class="btn btn-primary">Add Product</button>
+            <button class="btn btn-primary">
+              {{ id ? "Edit Product" : "Add Product" }}
+            </button>
           </div>
         </form>
       </div>
@@ -128,8 +130,6 @@
           style="object-fit: contain; height: 250px"
         />
       </div>
-
-      <!-- https://seed2plant.in/cdn/shop/products/saladcucumberseeds.jpg -->
 
       <div class="card-body">
         <h5 class="card-title">Title: {{ product.title }}</h5>

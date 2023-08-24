@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row gap-4">
-    <div class="col card py-3">
+    <div class="col card py-3 h-50">
       <p class="h5 mx-3">Add Product</p>
       <div class="container mt-2">
         <form
@@ -108,7 +108,7 @@
       </div>
     </div>
     <div class="col card py-3">
-      <div class="h-50 overflow-hidden">
+      <div class="h-75">
         <div
           *ngIf="!product.imageUrl || !isValidImageUrl()"
           class="mx-auto w-50"
@@ -116,13 +116,15 @@
           <ng-lottie [options]="options"></ng-lottie>
         </div>
         <img
-          *ngIf="product.imageUrl"
+          *ngIf="product.imageUrl && isValidImageUrl()"
           [src]="product.imageUrl"
-          class="card-img-top mx-auto h-100"
+          class="card-img-top mx-auto"
           alt="..."
-          style="object-fit: contain"
+          style="object-fit: contain; height: 250px"
         />
       </div>
+
+      <!-- https://seed2plant.in/cdn/shop/products/saladcucumberseeds.jpg -->
 
       <div class="card-body">
         <h5 class="card-title">Title: {{ product.title }}</h5>

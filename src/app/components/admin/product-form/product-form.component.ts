@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { AnimationOptions } from 'ngx-lottie';
 
 import { Product } from 'src/app/interface/Product';
-import { CategoryService } from 'src/app/services/category.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'product-form',
@@ -14,17 +15,19 @@ export class AdminProductFormComponent {
     path: '/assets/default_product.json',
   };
   product = new Product();
-  categories;
-
-  constructor(private categoryService: CategoryService) {
-    this.categories = categoryService.getCategories();
+  categories: string[];
+  constructor(private productService: ProductService) {
+    this.categories = productService.getCategories();
   }
 
   isValidImageUrl(): boolean {
     return new RegExp('(.*?).(jpg|png|jpeg)$').test(this.product.imageUrl);
   }
 
-  onSubmit(form: any) {
-    console.log(form.value);
+  async onSubmit(form: NgForm) {
+    try {
+      await this.productService.saveProduct(form.value);
+      form.resetForm();
+    } catch (error) {}
   }
 }

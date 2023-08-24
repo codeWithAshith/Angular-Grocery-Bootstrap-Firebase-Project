@@ -34,11 +34,11 @@ export class HomeComponent implements OnInit {
   }
 
   setSlectedCategory(category: string): void {
-    this.selectedCategory = category;
     if (category === 'All') this.products = this.originalProducts;
     else
       this.products = this.originalProducts.filter(
         (product) => product.category === category
       );
+    this.selectedCategory = category;
   }
 }

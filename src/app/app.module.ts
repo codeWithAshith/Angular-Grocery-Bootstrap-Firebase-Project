@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-
+import { LottieModule } from 'ngx-lottie';
+  
 import { environment } from 'src/environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +20,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { AdminProductsComponent } from './components/admin/products/products.component';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
+
+export function playerFactory() {
+  return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
+}
 
 @NgModule({
   declarations: [
@@ -39,6 +44,7 @@ import { provideDatabase, getDatabase } from '@angular/fire/database';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    LottieModule.forRoot({ player: playerFactory }),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'products', component: ProductsComponent },

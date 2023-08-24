@@ -1,5 +1,14 @@
-<div class="formGroup">
-  <button type="button" class="btn btn-primary" (click)="authService.login()">
+<div
+  class="formGroup d-flex flex-column mt-5 border-1 p-5 justify-content-center align-items-center"
+>
+  <h1 class="font-monospace display-3">WELCOME</h1>
+  <h3 class="h3 font-monospace">A Grocery store at your fingertips</h3>
+
+  <div style="width: 28vw">
+    <ng-lottie [options]="options"></ng-lottie>
+  </div>
+
+  <button type="button" class="btn btn-primary px-5" (click)="authService.login()">
     Log in with Google
   </button>
 </div>

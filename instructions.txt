@@ -33,4 +33,6 @@ ng g c "interfaceName"
 // here
 
 
+npm i lottie-web ngx-lottie
+
 

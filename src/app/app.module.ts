@@ -21,6 +21,11 @@ import { RouterModule } from '@angular/router';
 import { AdminProductsComponent } from './components/admin/products/products.component';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { AuthGuardService } from './services/auth-guard.service';
+import { AdminAuthGuardService } from './services/admin-auth-guard.service';
+import {
+  AngularFireDatabase,
+  AngularFireDatabaseModule,
+} from '@angular/fire/compat/database';
 
 export function playerFactory() {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -45,6 +50,7 @@ export function playerFactory() {
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFireDatabaseModule,
     LottieModule.forRoot({ player: playerFactory }),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
@@ -68,15 +74,14 @@ export function playerFactory() {
       {
         path: 'admin/products',
         component: AdminProductsComponent,
-        canActivate: [AuthGuardService],
+        canActivate: [AuthGuardService, AdminAuthGuardService],
       },
       {
         path: 'admin/orders',
         component: AdminOrdersComponent,
-        canActivate: [AuthGuardService],
+        canActivate: [AuthGuardService, AdminAuthGuardService],
       },
     ]),
-    provideDatabase(() => getDatabase()),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -37,7 +37,8 @@ export class AuthService {
           id: additionalUserInfo?.profile?.id || '',
           name: additionalUserInfo?.profile?.name || '',
           picture: additionalUserInfo?.profile?.picture || '',
-          isAdmin: false,
+          isAdmin:
+            additionalUserInfo?.profile?.email === 'codewithashith@gmail.com',
         };
 
         this.userService.saveUser(appUser);
@@ -54,6 +55,14 @@ export class AuthService {
 
   isLoggedIn(): boolean {
     return JSON.parse(localStorage.getItem('user')!) !== null;
+  }
+
+  getUser(): AppUser {
+    return JSON.parse(localStorage.getItem('user')!);
+  }
+
+  isAdmin(): boolean {
+    return JSON.parse(localStorage.getItem('user')!).isAdmin;
   }
 
   async logout() {

@@ -6,7 +6,6 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'admin-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css'],
 })
 export class AdminProductsComponent implements OnInit {
   products: Product[] = [];

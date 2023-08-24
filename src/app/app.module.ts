@@ -10,7 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HomeComponent } from './components/home/home.component';
-import { ProductsComponent } from './components/products/products.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { OrderComponent } from './components/order/order.component';
@@ -38,7 +37,6 @@ export function playerFactory() {
   declarations: [
     AppComponent,
     HomeComponent,
-    ProductsComponent,
     CartComponent,
     CheckOutComponent,
     OrderComponent,
@@ -61,7 +59,6 @@ export function playerFactory() {
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'products', component: ProductsComponent },
       {
         path: 'cart',
         component: CartComponent,

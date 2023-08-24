@@ -1,1 +1,56 @@
-<p>home works!</p>
+<div
+  *ngIf="loading"
+  class="d-flex justify-content-center align-items-center w-100"
+  style="min-height: 80vh"
+>
+  <spinner-util />
+</div>
+<div *ngIf="!loading" class="row">
+  <div class="col-3">
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        [ngClass]="selectedCategory === 'All' ? 'active' : ''"
+        (click)="selectedCategory = 'All'"
+      >
+        All
+      </li>
+      <li
+        *ngFor="let category of categories"
+        class="list-group-item"
+        [ngClass]="selectedCategory === category ? 'active' : ''"
+        (click)="setSlectedCategory(category)"
+      >
+        {{ category }}
+      </li>
+    </ul>
+  </div>
+  <div class="col">
+    <div class="row gap-0 text-center justify-content-md-center p-1">
+      <div
+        *ngIf="products.length === 0"
+        class="mt-5 d-flex justify-content-center h-75 align-items-center"
+        style="width: 40vw"
+      >
+        <ng-lottie [options]="options"></ng-lottie>
+      </div>
+      <div *ngFor="let product of products" class="col-6">
+        <div class="card mb-2">
+          <img
+            [src]="product.imageUrl"
+            class="card-img-top my-1"
+            style="height: 150px; object-fit: contain"
+            alt="..."
+          />
+          <div class="card-body">
+            <h5 class="card-title">{{ product.title }}</h5>
+            <p class="card-text">₹ {{ product.price }}</p>
+            <div class="d-grid">
+              <button class="btn btn-primary" type="button">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,7 +9,6 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'product-form',
   templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.css'],
 })
 export class AdminProductFormComponent {
   id;

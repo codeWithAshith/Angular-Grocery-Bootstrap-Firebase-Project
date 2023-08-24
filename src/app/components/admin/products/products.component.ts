@@ -23,4 +23,9 @@ export class AdminProductsComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  delete(id: string): void {
+    if (!confirm('Are you sure you want to delete this product?')) return;
+    this.productService.delete(id);
+  }
 }

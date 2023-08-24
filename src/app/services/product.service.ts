@@ -22,7 +22,7 @@ export class ProductService {
 
   async saveProduct(product: Product): Promise<boolean> {
     try {
-      await this.db.list('/products/').push(product);
+      await this.db.list('/products').push(product);
       return Promise.resolve(true);
     } catch (error) {
       console.log('saveProduct ' + error);
@@ -32,5 +32,9 @@ export class ProductService {
 
   getProducts() {
     return this.db.list('/products').snapshotChanges();
+  }
+
+  delete(id: string): void {
+    this.db.object('/products/' + id).remove();
   }
 }

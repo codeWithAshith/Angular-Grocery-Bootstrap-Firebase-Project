@@ -76,11 +76,6 @@ export function playerFactory() {
         canActivate: [AuthGuardService],
       },
       {
-        path: 'admin/products',
-        component: AdminProductsComponent,
-        canActivate: [AuthGuardService, AdminAuthGuardService],
-      },
-      {
         path: 'admin/products/new',
         component: AdminProductFormComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService],
@@ -88,6 +83,11 @@ export function playerFactory() {
       {
         path: 'admin/products/:id',
         component: AdminProductFormComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService],
+      },
+      {
+        path: 'admin/products',
+        component: AdminProductsComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService],
       },
       {

@@ -31,6 +31,6 @@ export class ProductService {
   }
 
   getProducts() {
-    return this.db.list('/products/');
+    return this.db.list('/products').snapshotChanges();
   }
 }

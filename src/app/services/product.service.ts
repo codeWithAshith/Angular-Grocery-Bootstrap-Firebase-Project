@@ -29,4 +29,8 @@ export class ProductService {
       return Promise.reject(false);
     }
   }
+
+  getProducts() {
+    return this.db.list('/products/');
+  }
 }

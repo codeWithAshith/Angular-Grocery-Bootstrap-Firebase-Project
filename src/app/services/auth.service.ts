@@ -17,7 +17,7 @@ interface AdditionalUserInfo {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(public router: Router, public afAuth: AngularFireAuth) {}
+  constructor(public router: Router, private afAuth: AngularFireAuth) {}
 
   async login() {
     try {
@@ -43,12 +43,13 @@ export class AuthService {
     }
   }
 
-  get isLoggedIn(): boolean {
+  isLoggedIn(): boolean {
     return JSON.parse(localStorage.getItem('user')!) !== null;
   }
 
   async logout() {
     await this.afAuth.signOut();
     localStorage.removeItem('user');
+    this.router.navigate(['/login']);
   }
 }

@@ -3,4 +3,5 @@ export interface AppUser {
   id: string;
   name: string;
   picture: string;
+  isAdmin?: boolean;
 }

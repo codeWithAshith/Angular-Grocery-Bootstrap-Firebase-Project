@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AppUser } from '../interface/appUser';
+import { UserService } from './user.service';
 
 interface AdditionalUserInfo {
   profile?: {
@@ -20,7 +21,8 @@ export class AuthService {
   constructor(
     public router: Router,
     private afAuth: AngularFireAuth,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {}
 
   async login() {
@@ -35,7 +37,10 @@ export class AuthService {
           id: additionalUserInfo?.profile?.id || '',
           name: additionalUserInfo?.profile?.name || '',
           picture: additionalUserInfo?.profile?.picture || '',
+          isAdmin: false,
         };
+
+        this.userService.saveUser(appUser);
 
         localStorage.setItem('user', JSON.stringify(appUser));
         let returnUrl =

@@ -1,6 +1,6 @@
 import { Injectable, NgZone, OnDestroy, inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AppUser } from '../interface/appUser';
 
@@ -17,7 +17,11 @@ interface AdditionalUserInfo {
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(public router: Router, private afAuth: AngularFireAuth) {}
+  constructor(
+    public router: Router,
+    private afAuth: AngularFireAuth,
+    private route: ActivatedRoute
+  ) {}
 
   async login() {
     try {
@@ -34,9 +38,9 @@ export class AuthService {
         };
 
         localStorage.setItem('user', JSON.stringify(appUser));
-        this.router.navigate(['/']);
-      } else {
-        this.router.navigate(['/login']);
+        let returnUrl =
+          this.route.snapshot.queryParamMap.get('returnUrl') || '/';
+        this.router.navigate([returnUrl]);
       }
     } catch (error) {
       console.error('Google sign-in error:', error);

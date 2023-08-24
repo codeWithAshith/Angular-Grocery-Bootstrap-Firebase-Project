@@ -3,7 +3,7 @@ import {
   AngularFireDatabase,
   AngularFireList,
 } from '@angular/fire/compat/database';
-import { AppUser } from '../interface/appUser';
+import { AuthUser } from '../interface/AuthUser';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ import { AppUser } from '../interface/appUser';
 export class UserService {
   constructor(private db: AngularFireDatabase) {}
 
-  async saveUser(user: AppUser) {
+  async saveUser(user: AuthUser) {
     try {
       await this.db.object('/users/' + user.id).update(user);
     } catch (error) {

@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row gap-4">
     <div class="col card py-3">
       <p class="h5 mx-3">Add Product</p>
       <div class="container mt-2">
@@ -32,7 +32,7 @@
             <div class="input-group rounded-5">
               <span class="input-group-text">₹</span>
               <input
-                type="text"
+                type="number"
                 class="form-control"
                 name="price"
                 [(ngModel)]="product.price"
@@ -42,12 +42,13 @@
                 }"
                 price
                 required
+                min="1"
               />
               <div
                 *ngIf="productForm.submitted && price.invalid"
                 class="invalid-feedback"
               >
-                <div *ngIf="price.invalid">Price is required</div>
+                <div *ngIf="price.invalid">Valid Price is required</div>
               </div>
             </div>
           </div>
@@ -88,6 +89,7 @@
               [ngClass]="{
                 'is-invalid': productForm.submitted && imageUrl.invalid
               }"
+              pattern="(.*?)\.(jpg|png|jpeg)$"
               imageUrl
               required
             />
@@ -95,7 +97,7 @@
               *ngIf="productForm.submitted && imageUrl.invalid"
               class="invalid-feedback"
             >
-              <div *ngIf="imageUrl.invalid">Image Url is required</div>
+              <div *ngIf="imageUrl.invalid">Valid Image Url is required</div>
             </div>
           </div>
 
@@ -105,6 +107,28 @@
         </form>
       </div>
     </div>
-    <div class="col">Column</div>
+    <div class="col card py-3">
+      <div class="h-50 overflow-hidden">
+        <div
+          *ngIf="!product.imageUrl || !isValidImageUrl()"
+          class="mx-auto w-50"
+        >
+          <ng-lottie [options]="options"></ng-lottie>
+        </div>
+        <img
+          *ngIf="product.imageUrl"
+          [src]="product.imageUrl"
+          class="card-img-top mx-auto h-100"
+          alt="..."
+          style="object-fit: contain"
+        />
+      </div>
+
+      <div class="card-body">
+        <h5 class="card-title">Title: {{ product.title }}</h5>
+        <h6 class="card-title">Category: {{ product.category }}</h6>
+        <p class="card-text">Price: ₹ {{ product.price }}</p>
+      </div>
+    </div>
   </div>
 </div>

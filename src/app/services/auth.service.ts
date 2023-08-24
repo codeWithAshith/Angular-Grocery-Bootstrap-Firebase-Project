@@ -2,7 +2,7 @@ import { Injectable, NgZone, OnDestroy, inject } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GoogleAuthProvider } from 'firebase/auth';
-import { AppUser } from '../interface/appUser';
+import { AuthUser } from '../interface/AuthUser';
 import { UserService } from './user.service';
 
 interface AdditionalUserInfo {
@@ -32,7 +32,7 @@ export class AuthService {
         const additionalUserInfo =
           user.additionalUserInfo as AdditionalUserInfo;
 
-        const appUser: AppUser = {
+        const appUser: AuthUser = {
           email: additionalUserInfo?.profile?.email || '',
           id: additionalUserInfo?.profile?.id || '',
           name: additionalUserInfo?.profile?.name || '',
@@ -57,7 +57,7 @@ export class AuthService {
     return JSON.parse(localStorage.getItem('user')!) !== null;
   }
 
-  getUser(): AppUser {
+  getUser(): AuthUser {
     return JSON.parse(localStorage.getItem('user')!);
   }
 

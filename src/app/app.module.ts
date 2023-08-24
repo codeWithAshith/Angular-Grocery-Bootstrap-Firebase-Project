@@ -26,6 +26,8 @@ import {
   AngularFireDatabase,
   AngularFireDatabaseModule,
 } from '@angular/fire/compat/database';
+import { AdminProductFormComponent } from './components/admin/product-form/product-form.component';
+import { FormsModule } from '@angular/forms';
 
 export function playerFactory() {
   return import(/* webpackChunkName: 'lottie-web' */ 'lottie-web');
@@ -44,10 +46,12 @@ export function playerFactory() {
     NavbarComponent,
     AdminOrdersComponent,
     AdminProductsComponent,
+    AdminProductFormComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
@@ -74,6 +78,16 @@ export function playerFactory() {
       {
         path: 'admin/products',
         component: AdminProductsComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService],
+      },
+      {
+        path: 'admin/products/new',
+        component: AdminProductFormComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService],
+      },
+      {
+        path: 'admin/products/:id',
+        component: AdminProductFormComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService],
       },
       {

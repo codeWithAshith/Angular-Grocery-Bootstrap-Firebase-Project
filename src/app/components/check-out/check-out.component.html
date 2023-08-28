@@ -1,1 +1,118 @@
-<p>check-out works!</p>
+<div class="container">
+  <p class="h4 mb-5"></p>
+
+  <div class="row">
+    <div class="col border rounded p-4 bg-white mx-2">
+      <div class="container mt-2">
+        <form
+          #addressForm="ngForm"
+          (ngSubmit)="addressForm.form.valid && onSubmit(addressForm)"
+        >
+          <div class="form-group mb-3">
+            <label class="mb-1">Name</label>
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              [(ngModel)]="address.name"
+              #name="ngModel"
+              [ngClass]="{
+                'is-invalid': addressForm.submitted && name.invalid
+              }"
+              required
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="addressForm.submitted && name.invalid"
+            >
+              <p *ngIf="name.invalid">Name is required</p>
+            </div>
+          </div>
+          <div class="form-group mb-3">
+            <label class="mb-1">Address</label>
+            <input
+              type="text"
+              class="form-control"
+              name="address"
+              [(ngModel)]="address.address"
+              #addr="ngModel"
+              [ngClass]="{
+                'is-invalid': addressForm.submitted && addr.invalid
+              }"
+              required
+            />
+            <div
+              *ngIf="addressForm.submitted && addr.invalid"
+              class="invalid-feedback"
+            >
+              <div *ngIf="addr.invalid">Address is required</div>
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label class="mb-1">City</label>
+            <input
+              type="text"
+              class="form-control"
+              name="city"
+              [(ngModel)]="address.city"
+              #city="ngModel"
+              [ngClass]="{
+                'is-invalid': addressForm.submitted && city.invalid
+              }"
+              required
+            />
+            <div
+              *ngIf="addressForm.submitted && city.invalid"
+              class="invalid-feedback"
+            >
+              <div *ngIf="city.invalid">City is required</div>
+            </div>
+          </div>
+
+          <div class="form-group mb-3">
+            <label class="mb-1">Pin Code</label>
+            <input
+              type="text"
+              class="form-control"
+              name="pincode"
+              [(ngModel)]="address.pincode"
+              #pincode="ngModel"
+              [ngClass]="{
+                'is-invalid': addressForm.submitted && pincode.invalid
+              }"
+              required
+            />
+            <div
+              *ngIf="addressForm.submitted && pincode.invalid"
+              class="invalid-feedback"
+            >
+              <div *ngIf="pincode.invalid">Pin Code is required</div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end form-group">
+            <button class="btn btn-primary">Place order</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col border rounded p-4 bg-white">
+      <p class="h5">Order Summary</p>
+      <p class="border-bottom pb-2">
+        You have {{ getCount() }} items in your cart.
+      </p>
+      <div
+        *ngFor="let product of cart"
+        class="d-flex justify-content-between px-2 mt-3 border-bottom"
+      >
+        <p>{{ getProductCount(product) }} x {{ product.title }}</p>
+        <p>₹ {{ getProductCount(product) * product.price }}</p>
+      </div>
+      <div class="d-flex justify-content-between px-2 mt-3 border-bottom h6">
+        <p>Total</p>
+        <p>₹{{ getTotal() }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnimationOptions } from 'ngx-lottie';
 
-import { Product } from 'src/app/interface/Product';
+import { Product } from 'src/app/class/Product';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({

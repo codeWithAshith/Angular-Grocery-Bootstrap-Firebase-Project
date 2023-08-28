@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimationOptions } from 'ngx-lottie';
-import { Product } from 'src/app/interface/Product';
+import { Product } from 'src/app/class/Product';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -32,6 +32,7 @@ export class CartComponent implements OnInit {
   getTotal(): number {
     return this.cartService.getCartTotal();
   }
+
   addToCart(product: Product) {
     this.cartService.addToCart(product);
   }

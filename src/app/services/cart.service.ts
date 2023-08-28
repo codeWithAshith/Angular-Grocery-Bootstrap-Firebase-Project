@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../interface/Product';
+import { Product } from '../class/Product';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -19,7 +19,7 @@ export class CartService {
     );
   }
 
-  getCartCount() {
+  getCartCount(): number {
     let cartProducts: Product[] = this.getCart() || [];
     if (cartProducts.length > 0) {
       return cartProducts.reduce((acc, curr) => {

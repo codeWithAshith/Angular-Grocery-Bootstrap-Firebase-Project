@@ -20,7 +20,9 @@
       >
     </li>
     <li *ngIf="!isAdmin()" class="nav-item">
-      <a routerLink="/cart" routerLinkActive="active" class="nav-link">Cart</a>
+      <a routerLink="/cart" routerLinkActive="active" class="nav-link"
+        >Cart - ({{ getCartCount() }})</a
+      >
     </li>
     <li *ngIf="!isAdmin()" class="nav-item">
       <a routerLink="/order" routerLinkActive="active" class="nav-link"

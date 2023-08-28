@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimationOptions } from 'ngx-lottie';
 import { Product } from 'src/app/interface/Product';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -18,7 +19,10 @@ export class HomeComponent implements OnInit {
     path: '/assets/empty.json',
   };
 
-  constructor(private productService: ProductService) {
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService
+  ) {
     this.categories = productService.getCategories();
   }
 
@@ -40,5 +44,9 @@ export class HomeComponent implements OnInit {
         (product) => product.category === category
       );
     this.selectedCategory = category;
+  }
+
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
   }
 }

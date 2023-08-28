@@ -2,13 +2,18 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private cartService: CartService,
+    private router: Router
+  ) {}
 
   isLoggedIn() {
     return this.authService.isLoggedIn();
@@ -28,5 +33,9 @@ export class NavbarComponent {
 
   isHome(): boolean {
     return this.router.url === '/';
+  }
+
+  getCartCount(): number {
+    return this.cartService.getCartCount();
   }
 }

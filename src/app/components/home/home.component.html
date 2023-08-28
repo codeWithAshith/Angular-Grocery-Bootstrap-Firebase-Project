@@ -46,7 +46,13 @@
             <h5 class="card-title">{{ product.title }}</h5>
             <p class="card-text">₹ {{ product.price }}</p>
             <div class="d-grid">
-              <button class="btn btn-primary" type="button">Add to Cart</button>
+              <button
+                class="btn btn-primary"
+                type="button"
+                (click)="addToCart(product)"
+              >
+                Add to Cart
+              </button>
             </div>
           </div>
         </div>

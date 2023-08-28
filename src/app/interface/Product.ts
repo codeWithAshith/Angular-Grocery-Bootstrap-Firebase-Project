@@ -5,4 +5,5 @@ export class Product {
   category!: string;
   imageUrl!: string;
   error!: string;
+  count?: number;
 }

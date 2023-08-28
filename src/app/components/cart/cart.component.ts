@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AnimationOptions } from 'ngx-lottie';
 import { Product } from 'src/app/interface/Product';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -8,10 +9,17 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartComponent implements OnInit {
   cart: Product[] = [];
+  options: AnimationOptions = {
+    path: '/assets/emptyCart.json',
+  };
 
   constructor(private cartService: CartService) {}
 
   ngOnInit(): void {
+    this.getCart();
+  }
+
+  getCart() {
     this.cart = this.cartService
       .getCart()
       .filter((product) => product.count! > 0);
@@ -38,5 +46,10 @@ export class CartComponent implements OnInit {
 
   getProductPrice(product: Product): number {
     return this.cartService.getProductPrice(product);
+  }
+
+  clearCart(): void {
+    this.cartService.clearCart();
+    this.getCart();
   }
 }

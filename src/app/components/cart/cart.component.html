@@ -1,9 +1,11 @@
-<div class="border bg-white">
+<div *ngIf="getCount() > 0" class="border bg-white">
   <div
     class="d-flex p-4 justify-content-between align-items-center border-bottom"
   >
     <div>You have {{ getCount() }} items in your cart.</div>
-    <button class="btn btn-outline-danger">Clear Cart</button>
+    <button class="btn btn-outline-danger" (click)="clearCart()">
+      Clear Cart
+    </button>
   </div>
   <table class="table table-borderless">
     <thead>
@@ -55,6 +57,18 @@
   <p class="w-100 d-flex justify-content-end px-4">₹ {{ getTotal() }}</p>
 </div>
 
-<div class="d-flex justify-content-end">
-  <button class="btn btn-success my-2 px-5" routerLink="/checkOut">Checkout</button>
+<div *ngIf="getCount() > 0" class="d-flex justify-content-end">
+  <button class="btn btn-success my-2 px-5" routerLink="/checkOut">
+    Checkout
+  </button>
+</div>
+
+<div *ngIf="getCount() === 0" class="d-flex flex-column">
+  <div class="mx-auto w-50">
+    <ng-lottie [options]="options"></ng-lottie>
+  </div>
+
+  <button class="btn btn-success my-4 px-5 mx-auto" routerLink="/">
+    Continue Shopping
+  </button>
 </div>

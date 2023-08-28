@@ -9,6 +9,7 @@ export class CartService {
   constructor() {}
 
   private updateCart(products: Product[]) {
+    console.log(products);
     localStorage.setItem('cart', JSON.stringify(products));
   }
 

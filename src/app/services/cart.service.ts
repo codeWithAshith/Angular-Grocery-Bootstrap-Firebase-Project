@@ -49,6 +49,25 @@ export class CartService {
       });
       this.updateCart(cartProducts);
     }
-    console.log(this.getCart());
+  }
+
+  removeFromCart(product: Product) {
+    let cartProducts: Product[] = this.getCart() || [];
+    cartProducts = cartProducts.map((pro) => {
+      if (pro.id === product.id) {
+        if (pro.count! > 0) return { ...pro, count: pro.count! - 1 };
+      }
+      return pro;
+    });
+    this.updateCart(cartProducts);
+  }
+
+  isInCart(product: Product): boolean {
+    return this.getProductCount(product) > 0;
+  }
+
+  getProductCount(product: Product): number {
+    let cartProducts: Product[] = this.getCart() || [];
+    return cartProducts.find((pro) => pro.id === product.id)?.count || 0;
   }
 }

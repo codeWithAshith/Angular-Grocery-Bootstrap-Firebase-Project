@@ -49,4 +49,16 @@ export class HomeComponent implements OnInit {
   addToCart(product: Product) {
     this.cartService.addToCart(product);
   }
+
+  removeFromCart(product: Product) {
+    this.cartService.removeFromCart(product);
+  }
+
+  isInCart(product: Product): boolean {
+    return this.cartService.isInCart(product);
+  }
+
+  getProductCount(product: Product): number {
+    return this.cartService.getProductCount(product);
+  }
 }

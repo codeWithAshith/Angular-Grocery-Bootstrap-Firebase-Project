@@ -62,7 +62,10 @@ export class AuthService {
   }
 
   isAdmin(): boolean {
-    return JSON.parse(localStorage.getItem('user')!).isAdmin;
+    return (
+      localStorage.getItem('user') &&
+      JSON.parse(localStorage.getItem('user')!).isAdmin
+    );
   }
 
   async logout() {

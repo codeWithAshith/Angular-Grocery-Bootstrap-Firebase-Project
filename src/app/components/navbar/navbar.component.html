@@ -1,6 +1,6 @@
 <header
   class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom"
-  *ngIf="isLoggedIn()"
+  *ngIf="isLoggedIn() || isHome()"
 >
   <a
     routerLink="/"
@@ -37,8 +37,11 @@
         >Manage Orders</a
       >
     </li>
-    <li class="nav-item">
+    <li *ngIf="isLoggedIn()" class="nav-item">
       <a class="nav-link" (click)="logout()">Logout</a>
+    </li>
+    <li *ngIf="!isLoggedIn()" class="nav-item">
+      <a class="nav-link" (click)="login()">Login</a>
     </li>
   </ul>
 </header>

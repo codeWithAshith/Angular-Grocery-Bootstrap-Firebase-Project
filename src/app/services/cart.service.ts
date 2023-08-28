@@ -6,13 +6,13 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class CartService {
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
   private updateCart(products: Product[]) {
     localStorage.setItem('cart', JSON.stringify(products));
   }
 
-  getCart(): Product[] | null {
+  getCart(): Product[] {
     return (
       localStorage.getItem('cart') && JSON.parse(localStorage.getItem('cart')!)
     );
@@ -23,6 +23,17 @@ export class CartService {
     if (cartProducts.length > 0) {
       return cartProducts.reduce((acc, curr) => {
         acc += curr.count!;
+        return acc;
+      }, 0);
+    }
+    return 0;
+  }
+
+  getCartTotal(): number {
+    let cartProducts: Product[] = this.getCart() || [];
+    if (cartProducts.length > 0) {
+      return cartProducts.reduce((acc, curr) => {
+        acc += curr.price! * curr.count! || 0;
         return acc;
       }, 0);
     }
@@ -56,6 +67,7 @@ export class CartService {
     cartProducts = cartProducts.map((pro) => {
       if (pro.id === product.id) {
         if (pro.count! > 0) return { ...pro, count: pro.count! - 1 };
+        return { ...pro };
       }
       return pro;
     });
@@ -69,5 +81,14 @@ export class CartService {
   getProductCount(product: Product): number {
     let cartProducts: Product[] = this.getCart() || [];
     return cartProducts.find((pro) => pro.id === product.id)?.count || 0;
+  }
+
+  getProductPrice(product: Product): number {
+    let cartProducts: Product[] = this.getCart() || [];
+    return cartProducts.find((pro) => pro.id === product.id)?.price || 0;
+  }
+
+  clearCart(): void {
+    this.updateCart([]);
   }
 }

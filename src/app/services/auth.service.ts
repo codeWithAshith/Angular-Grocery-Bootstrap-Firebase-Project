@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AuthUser } from '../interface/AuthUser';
 import { UserService } from './user.service';
+import { CartService } from './cart.service';
 
 interface AdditionalUserInfo {
   profile?: {
@@ -22,7 +23,8 @@ export class AuthService {
     public router: Router,
     private afAuth: AngularFireAuth,
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private cartService: CartService
   ) {}
 
   async login() {
@@ -71,6 +73,7 @@ export class AuthService {
   async logout() {
     await this.afAuth.signOut();
     localStorage.removeItem('user');
+    this.cartService.clearCart();
     this.router.navigate(['/login']);
   }
 }

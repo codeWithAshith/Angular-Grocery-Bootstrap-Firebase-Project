@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
     return this.cartService.isInCart(product);
   }
 
-  getProductCount(product: Product): number {
-    return this.cartService.getProductCount(product);
+  getProductCount(product: Product): number{
+    return this.cartService.getProductCount(product)
   }
 }

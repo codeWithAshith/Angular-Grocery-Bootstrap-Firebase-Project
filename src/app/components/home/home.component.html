@@ -45,7 +45,7 @@
           <div class="card-body">
             <h5 class="card-title">{{ product.title }}</h5>
             <p class="card-text">₹ {{ product.price }}</p>
-            <div *ngIf="!isInCart(product)" class="d-grid">
+            <div *ngIf="!isInCart(product) && !isAdmin()" class="d-grid">
               <button
                 class="btn btn-primary"
                 type="button"
@@ -55,7 +55,7 @@
               </button>
             </div>
             <div
-              *ngIf="isInCart(product)"
+              *ngIf="isInCart(product) && !isAdmin()"
               class="d-flex gap-2 align-items-center justify-content-center"
             >
               <button

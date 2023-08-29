@@ -6,5 +6,6 @@ export interface Order {
   address: string;
   city: string;
   pincode: number;
+  userId: string;
   cart: Product[];
 }

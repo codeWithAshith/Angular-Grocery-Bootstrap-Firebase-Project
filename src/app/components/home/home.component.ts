@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AnimationOptions } from 'ngx-lottie';
-import { Product } from 'src/app/interface/Product';
+import { Product } from 'src/app/class/Product';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
   };
 
   constructor(
+    private authService: AuthService,
     private productService: ProductService,
     private cartService: CartService
   ) {
@@ -54,11 +56,15 @@ export class HomeComponent implements OnInit {
     this.cartService.removeFromCart(product);
   }
 
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
   isInCart(product: Product): boolean {
     return this.cartService.isInCart(product);
   }
 
-  getProductCount(product: Product): number{
-    return this.cartService.getProductCount(product)
+  getProductCount(product: Product): number {
+    return this.cartService.getProductCount(product);
   }
 }

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Address } from 'src/app/class/Address';
 import { Product } from 'src/app/class/Product';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 
@@ -17,6 +18,7 @@ export class CheckOutComponent {
   constructor(
     private cartService: CartService,
     private checkoutService: CheckoutService,
+    private authService: AuthService,
     private router: Router
   ) {
     this.cart = cartService.getCart();
@@ -42,6 +44,7 @@ export class CheckOutComponent {
     try {
       await this.checkoutService.placeOrder({
         ...form.value,
+        userId: this.authService.getUser().id,
         cart: this.cartService.getCart(),
       });
       form.resetForm();

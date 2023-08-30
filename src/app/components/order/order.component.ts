@@ -24,18 +24,13 @@ export class OrderComponent implements OnInit {
       .subscribe((response) => {
         this.orders = response.map((order) => {
           const orderValue = order.payload.exportVal();
-          let total = 0;
           let orderDetails: string[] = [];
-          for (const c in orderValue.cart) {
-            total += orderValue.cart[c].count * orderValue.cart[c].price;
-            orderDetails.push(
-              `${orderValue.cart[c].title} x ${orderValue.cart[c].count}`
-            );
+          for (const c in orderValue.orderDetails) {
+            orderDetails.push(orderValue.orderDetails[c]);
           }
+          orderValue.orderDetails = orderDetails;
           return {
             id: order.key,
-            total: total,
-            orderDetails: orderDetails,
             ...orderValue,
           };
         });

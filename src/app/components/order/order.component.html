@@ -1,1 +1,57 @@
-<p>order works!</p>
+<div
+  *ngIf="loading"
+  class="d-flex justify-content-center align-items-center w-100"
+  style="min-height: 80vh"
+>
+  <spinner-util />
+</div>
+<div *ngIf="!loading" class="row">
+  <table class="table table-borderless">
+    <thead>
+      <tr class="text-center border-bottom">
+        <th>Order ID</th>
+        <th>Date</th>
+        <th>Address</th>
+        <th>Product</th>
+        <th>Total</th>
+        <th class="text-end px-4">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders" class="text-center border-bottom">
+        <td class="pt-4">
+          {{ order.id.substring(6, 50) }}
+        </td>
+        <td class="pt-4">
+          {{ order.date }}
+        </td>
+        <td class="pt-4">
+          {{ order.address }}, {{ order.city }} - {{ order.pincode }}
+        </td>
+        <td
+          class="pt-4 d-flex flex-column justify-content-center align-items-center gap-2"
+        >
+          <div
+            class="text-body-secondary"
+            *ngFor="let orderDetail of order.orderDetails"
+          >
+            {{ orderDetail }}
+          </div>
+        </td>
+        <td class="pt-4">₹ {{ order.total }}</td>
+        <td class="pt-4 text-end px-4">
+          <span
+            *ngIf="order.status === 'Pending'"
+            class="badge text-bg-warning"
+            >{{ order.status }}</span
+          >
+          <span
+            *ngIf="order.status === 'Delivered'"
+            class="badge text-bg-success"
+            >{{ order.status }}</span
+          >
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

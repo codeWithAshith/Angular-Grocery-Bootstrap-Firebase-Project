@@ -7,5 +7,9 @@ export interface Order {
   city: string;
   pincode: number;
   userId: string;
+  status?: string;
+  total?: number;
   cart: Product[];
+  date: string;
+  orderDetails: string[];
 }

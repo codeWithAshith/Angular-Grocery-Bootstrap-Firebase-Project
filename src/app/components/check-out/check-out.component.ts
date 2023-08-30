@@ -44,6 +44,10 @@ export class CheckOutComponent {
     try {
       await this.checkoutService.placeOrder({
         ...form.value,
+        status: 'Pending',
+        date: `${new Date().getDate()}-${
+          new Date().getMonth() + 1
+        }-${new Date().getFullYear()}`,
         userId: this.authService.getUser().id,
         cart: this.cartService.getCart(),
       });
